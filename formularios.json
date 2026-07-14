@@ -3,35 +3,35 @@
         {
             "nombre": "Evaluación de Mercado – Jefes, Coordinadores, Supervisores",
             "descripcion": "Evaluaciones de mercado: nuestra marca y la competencia.",
-            "url": "https://ee.kobotoolbox.org/x/ejemplo1",
+            "url": "https://ee.kobotoolbox.org/x/xjILeZWO",
             "categoria": "Comercial",
             "icono": "📋"
         },
         {
             "nombre": "Estudio de Tiempos de Ventas",
             "descripcion": "Medición de tiempos de las actividades del vendedor.",
-            "url": "https://ee.kobotoolbox.org/x/ejemplo2",
+            "url": "https://ee.kobotoolbox.org/x/Ns5ZGvxy",
             "categoria": "Comercial",
             "icono": "⌛"
         },
         {
             "nombre": "Acompañamiento Comercial (Face to Face)",
             "descripcion": "Seguimiento y compromisos de los vendedores.",
-            "url": "https://ee.kobotoolbox.org/x/ejemplo3",
+            "url": "https://ee.kobotoolbox.org/x/BVOSoxFt",
             "categoria": "Comercial",
             "icono": "🚚"
         },
         {
             "nombre": "Encuesta de Satisfacción – Sistemas de Ventas",
             "descripcion": "Encuesta del desempeño de los analistas, no de aplicaciones.",
-            "url": "https://ee.kobotoolbox.org/x/ejemplo4",
+            "url": "https://ee.kobotoolbox.org/x/dJZCSfoc",
             "categoria": "Tecnología",
             "icono": "📍"
         },
         {
-            "nombre": "Censo de Clientes Nuevo Ingreso",
-            "descripcion": "Captura de datos para nuevos puntos de venta.",
-            "url": "https://ee.kobotoolbox.org/x/ejemplo5",
+            "nombre": "Capitalizacion Censo",
+            "descripcion": "Formulario para ingreso de lo negocias que fueron capitalizados de censo Bocadeli",
+            "url": "https://ee.kobotoolbox.org/x/BXG2L4Yx",
             "categoria": "Censos",
             "icono": "🗺️"
         }
