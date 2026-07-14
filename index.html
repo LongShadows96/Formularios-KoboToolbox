@@ -2,52 +2,47 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Portal de Formularios | Bocadeli</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0E1F7A">
+    <link rel="icon" href="logo.png">
 </head>
 <body>
 
-    <header class="main-header">
-        <div class="header-content">
-            <div class="logo-area">
-                <img src="logo.png" alt="Bocadeli" class="main-logo">
-                <div class="brand-text">
-                    <span class="bi-text">INTELIGENCIA COMERCIAL · BI</span>
-                    <h1>PORTAL DE FORMULARIOS</h1>
-                </div>
-            </div>
-            <div class="slogan-area">
-                <img src="https://img.icons8.com/color/96/null/smiling-sun.png" style="width:40px; display:none;"> 
-                <span class="slogan">¡DALE <br><strong>SABOR</strong><br> A TU VIDA!</span>
-            </div>
+    <header class="navbar">
+        <div class="navbar-content">
+            <img src="logo.png" alt="Bocadeli" class="nav-logo">
+            <span class="nav-title">BOCADELI</span>
         </div>
     </header>
 
-    <section class="search-section">
-        <div class="search-container">
-            <span class="search-icon">🔍</span>
-            <input type="text" id="searchInput" placeholder="Buscar formulario por nombre, área o palabra clave...">
-        </div>
-    </section>
+    <main class="main-content">
+        <section class="hero">
+            <h1>Bienvenido al Portal</h1>
+            <p>Seleccione el formulario correspondiente para su gestión en campo.</p>
+        </section>
 
-    <nav class="filter-nav">
-        <div id="filter-container" class="filter-container">
-            <!-- Los botones de filtro se generan dinámicamente -->
-        </div>
-    </nav>
+        <!-- BUSCADOR CORREGIDO -->
+        <section class="search-area">
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="Buscar por nombre o categoría...">
+            </div>
+        </section>
 
-    <main class="container">
-        <div id="results-area">
-            <!-- Los formularios agrupados aparecerán aquí -->
+        <!-- FILTROS RESPONSIVE -->
+        <nav class="filter-wrapper">
+            <div id="filter-container" class="filter-container">
+                <!-- Botones se cargan aquí -->
+            </div>
+        </nav>
+
+        <div id="results-area" class="results-area">
+            <!-- Cards se cargan aquí -->
         </div>
     </main>
-
-    <div id="ios-prompt" class="ios-prompt hidden">
-        <p>Instala esta App: Toca <span class="share-icon">⎋</span> y "Añadir a pantalla de inicio".</p>
-    </div>
 
     <button id="installBtn" class="btn-install hidden">Instalar Aplicación</button>
 
