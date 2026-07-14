@@ -5,15 +5,25 @@ const searchInput = document.getElementById('searchInput');
 const filterContainer = document.getElementById('filter-container');
 const resultsArea = document.getElementById('results-area');
 
+// Función de inicio con Cache Busting
 async function init() {
     try {
-        const response = await fetch('formularios.json');
-        const data = await response.json();
+        // Forzamos al navegador a no usar caché añadiendo la hora actual al URL
+        const respuesta = await fetch(`formularios.json?v=${Date.now()}`, {
+            cache: 'no-store'
+        });
+        
+        if (!respuesta.ok) throw new Error('No se pudo obtener el archivo');
+        
+        const data = await respuesta.json();
         formulariosData = data.formularios;
+        
         renderFilters();
         renderFormularios();
+        console.log("Datos actualizados desde el servidor");
     } catch (error) {
-        resultsArea.innerHTML = '<p style="text-align:center;">Error al cargar formularios.json</p>';
+        console.error("Error cargando formularios:", error);
+        resultsArea.innerHTML = '<p style="text-align:center; padding:20px;">Error al conectar con el servidor.</p>';
     }
 }
 
@@ -42,10 +52,10 @@ function renderFormularios() {
     const busqueda = searchInput.value.toLowerCase();
     
     let filtrados = formulariosData.filter(f => {
-        const matchSearch = f.nombre.toLowerCase().includes(busqueda) || 
-                            f.descripcion.toLowerCase().includes(busqueda);
-        const matchCat = (categoriaActiva === "Todos" || f.categoria === categoriaActiva);
-        return matchSearch && matchCat;
+        const coincideSearch = f.nombre.toLowerCase().includes(busqueda) || 
+                               f.descripcion.toLowerCase().includes(busqueda);
+        const coincideCat = (categoriaActiva === "Todos" || f.categoria === categoriaActiva);
+        return coincideSearch && coincideCat;
     });
 
     resultsArea.innerHTML = '';
@@ -79,4 +89,6 @@ function renderFormularios() {
 }
 
 searchInput.addEventListener('input', renderFormularios);
+
+// Ejecutar al cargar la página
 init();
