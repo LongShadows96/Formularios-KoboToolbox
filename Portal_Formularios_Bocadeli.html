@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal de Formularios Bocadeli</title>
+<style>
+:root{
+ --azul:#0d47a1;
+ --rojo:#d62828;
+ --amarillo:#f4c400;
+ --gris:#f4f6f9;
+}
+*{box-sizing:border-box;font-family:Segoe UI,Arial,sans-serif}
+body{margin:0;background:var(--gris);}
+header{
+background:linear-gradient(90deg,var(--azul),#1f6fd8);
+color:#fff;padding:24px;text-align:center;
+box-shadow:0 2px 10px rgba(0,0,0,.15)
+}
+header h1{margin:0;font-size:32px}
+header p{margin:8px 0 0;color:#ffe082;font-weight:bold}
+.container{max-width:1100px;margin:auto;padding:24px}
+#buscar{
+width:100%;padding:14px 18px;border-radius:12px;
+border:1px solid #ccc;font-size:16px;margin-bottom:20px;
+}
+.cat{margin:18px 0}
+.cat h2{color:var(--azul);border-left:6px solid var(--rojo);padding-left:10px}
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+gap:18px;
+}
+.card{
+background:#fff;border-radius:16px;padding:18px;
+box-shadow:0 4px 12px rgba(0,0,0,.1);
+transition:.2s;
+}
+.card:hover{transform:translateY(-4px)}
+.card h3{margin:0;color:var(--azul)}
+.card p{margin:8px 0;color:#666}
+.btn{
+display:block;text-align:center;
+background:var(--rojo);color:#fff;
+padding:12px;border-radius:10px;
+text-decoration:none;font-weight:bold;
+}
+footer{text-align:center;color:#777;padding:20px}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Portal de Formularios Bocadeli</h1>
+<p>¡Dale Sabor a Tu Vida!</p>
+</header>
+
+<div class="container">
+<input id="buscar" placeholder="🔍 Buscar formulario...">
+
+<div id="contenido"></div>
+</div>
+
+<footer>
+Inteligencia Comercial BI - Portal de Formularios
+</footer>
+
+<script>
+
+// ===== SOLO EDITA ESTA LISTA =====
+const formularios=[
+
+{categoria:"Comercial",nombre:"Evaluacion de Mercado , Jefes, Coordinadores, Supervisores",icono:"📋",descripcion:"Evaluaciones de Mercado Nuestra marca y la Competencia",url:"https://ee.kobotoolbox.org/x/xjILeZWO"},
+
+{categoria:"Comercial",nombre:"Estudio de Tiempos Ventas",icono:"⏳",descripcion:"Medicion de tiempos de las atividades del vendedor",url:"https://ee.kobotoolbox.org/x/Ns5ZGvxy"},
+
+{categoria:"Comercial",nombre:"Acompañamiento Comercial (face to Face)",icono:"🚚",descripcion:"Seguimientos y Compomisos de los vendedores.",url:"https://ee.kobotoolbox.org/x/BVOSoxFt"},
+
+{categoria:"Tecnología",nombre:"Encuesta de satisfacción – Sistemas de Ventas",icono:"📍",descripcion:"Encuesta del Desempeño de los analista, No de apicaciones",url:"https://ee.kobotoolbox.org/x/dJZCSfoc"},
+
+{categoria:"Censos",nombre:"Capitalizacion de Censo",icono:"📦",descripcion:"Capitalizacion de las oportunodades de Censo Bocadeli",url:"https://ee.kobotoolbox.org/x/BXG2L4Yx"}
+
+];
+
+// ================================
+
+function render(lista){
+
+const cont=document.getElementById("contenido");
+cont.innerHTML="";
+
+const categorias=[...new Set(lista.map(x=>x.categoria))];
+
+categorias.forEach(cat=>{
+
+const sec=document.createElement("div");
+sec.className="cat";
+
+sec.innerHTML=`<h2>${cat}</h2><div class="grid"></div>`;
+
+const grid=sec.querySelector(".grid");
+
+lista.filter(x=>x.categoria===cat).forEach(f=>{
+
+grid.innerHTML+=`
+<div class="card">
+<h3>${f.icono} ${f.nombre}</h3>
+<p>${f.descripcion}</p>
+<a class="btn" href="${f.url}" target="_blank">Abrir formulario</a>
+</div>`;
+
+});
+
+cont.appendChild(sec);
+
+});
+
+}
+
+render(formularios);
+
+document.getElementById("buscar").addEventListener("keyup",e=>{
+
+const t=e.target.value.toLowerCase();
+
+render(formularios.filter(f=>
+
+f.nombre.toLowerCase().includes(t) ||
+f.categoria.toLowerCase().includes(t)
+
+));
+
+});
+
+</script>
+
+</body>
+</html>
