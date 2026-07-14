@@ -282,6 +282,7 @@ footer strong{color:var(--azul-marino)}
   .eslogan-img{height:26px}
 }
 </style>
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
 
@@ -468,6 +469,17 @@ instalarBtn.addEventListener("click", async ()=>{
 window.addEventListener("appinstalled", ()=>{
   instalarBtn.style.display="none";
 });
+</script>
+
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js")
+      .then(() => console.log("Service Worker registrado"))
+      .catch(err => console.error("SW Error:", err));
+  });
+}
 </script>
 
 </body>
