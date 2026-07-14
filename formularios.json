@@ -1,0 +1,39 @@
+{
+    "formularios": [
+        {
+            "nombre": "Evaluación de Mercado – Jefes, Coordinadores, Supervisores",
+            "descripcion": "Evaluaciones de mercado: nuestra marca y la competencia.",
+            "url": "https://ee.kobotoolbox.org/x/ejemplo1",
+            "categoria": "Comercial",
+            "icono": "📋"
+        },
+        {
+            "nombre": "Estudio de Tiempos de Ventas",
+            "descripcion": "Medición de tiempos de las actividades del vendedor.",
+            "url": "https://ee.kobotoolbox.org/x/ejemplo2",
+            "categoria": "Comercial",
+            "icono": "⌛"
+        },
+        {
+            "nombre": "Acompañamiento Comercial (Face to Face)",
+            "descripcion": "Seguimiento y compromisos de los vendedores.",
+            "url": "https://ee.kobotoolbox.org/x/ejemplo3",
+            "categoria": "Comercial",
+            "icono": "🚚"
+        },
+        {
+            "nombre": "Encuesta de Satisfacción – Sistemas de Ventas",
+            "descripcion": "Encuesta del desempeño de los analistas, no de aplicaciones.",
+            "url": "https://ee.kobotoolbox.org/x/ejemplo4",
+            "categoria": "Tecnología",
+            "icono": "📍"
+        },
+        {
+            "nombre": "Censo de Clientes Nuevo Ingreso",
+            "descripcion": "Captura de datos para nuevos puntos de venta.",
+            "url": "https://ee.kobotoolbox.org/x/ejemplo5",
+            "categoria": "Censos",
+            "icono": "🗺️"
+        }
+    ]
+}

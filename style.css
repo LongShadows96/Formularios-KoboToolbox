@@ -1,0 +1,202 @@
+:root {
+    --azul: #0E1F7A;
+    --rojo: #E30613;
+    --bg: #F3F5F9;
+    --white: #ffffff;
+    --text: #1a1a1a;
+    --shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    padding-bottom: 50px;
+}
+
+/* Navbar limpio como tu captura */
+.navbar {
+    background: var(--white);
+    padding: 12px 20px;
+    border-bottom: 1px solid #eee;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.nav-logo { height: 40px; }
+.nav-title { font-weight: 800; color: var(--azul); font-size: 1.1rem; letter-spacing: 0.5px; }
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 40px 20px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero h1 { color: var(--azul); font-size: 2rem; margin-bottom: 10px; }
+.hero p { color: #555; font-size: 1rem; line-height: 1.4; }
+
+/* Buscador corregido para móviles */
+.search-area {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.search-box {
+    background: var(--white);
+    width: 100%;
+    max-width: 500px;
+    padding: 14px 20px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 16px;
+}
+
+/* Filtros con scroll lateral en móviles */
+.filter-wrapper {
+    overflow-x: auto;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: center;
+    -webkit-overflow-scrolling: touch;
+}
+
+.filter-container {
+    display: flex;
+    gap: 10px;
+}
+
+.filter-btn {
+    padding: 8px 18px;
+    border-radius: 20px;
+    border: none;
+    background: var(--white);
+    color: var(--azul);
+    font-weight: 700;
+    white-space: nowrap;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.filter-btn.active {
+    background: var(--rojo);
+    color: var(--white);
+}
+
+.count-badge {
+    font-size: 0.75rem;
+    opacity: 0.8;
+    margin-left: 5px;
+}
+
+/* Cards como tu captura */
+.results-area {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.category-group { margin-bottom: 30px; }
+
+.category-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--azul);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+}
+
+.card-icon {
+    width: 48px;
+    height: 48px;
+    background: #f0f4ff;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.card h3 { 
+    color: var(--azul); 
+    font-size: 1.2rem; 
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+.card p { 
+    color: #777; 
+    font-size: 0.95rem; 
+    margin-bottom: 25px; 
+    flex-grow: 1; 
+}
+
+.btn-form {
+    background: var(--azul); /* Azul oscuro como tu captura */
+    color: var(--white);
+    text-decoration: none;
+    text-align: center;
+    padding: 14px;
+    border-radius: 10px;
+    font-weight: 700;
+}
+
+/* Botón Instalar */
+.btn-install {
+    position: fixed; bottom: 20px; left: 50%;
+    transform: translateX(-50%);
+    background: var(--rojo); color: white; border: none;
+    padding: 12px 25px; border-radius: 30px;
+    font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.hidden { display: none !important; }
+
+/* Ajustes para móviles */
+@media (max-width: 600px) {
+    .filter-wrapper { justify-content: flex-start; }
+    .hero h1 { font-size: 1.6rem; }
+    .grid { grid-template-columns: 1fr; }
+    .navbar-content { justify-content: center; }
+}
