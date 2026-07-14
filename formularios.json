@@ -1,16 +1,39 @@
 {
     "formularios": [
         {
-            "nombre": "Censo de Puntos de Venta",
-            "descripcion": "Registro y actualización de coordenadas y datos de clientes en ruta.",
+            "nombre": "Evaluación de Mercado – Jefes, Coordinadores, Supervisores",
+            "descripcion": "Evaluaciones de mercado: nuestra marca y la competencia.",
             "url": "https://ee.kobotoolbox.org/x/ejemplo1",
-            "svgPath": "<circle cx='12' cy='12' r='3'></circle><path d='M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z'></path>"
+            "categoria": "Comercial",
+            "icono": "📋"
         },
         {
-            "nombre": "Auditoría de Góndola",
-            "descripcion": "Verificación de presencia de marca y precios en supermercados.",
+            "nombre": "Estudio de Tiempos de Ventas",
+            "descripcion": "Medición de tiempos de las actividades del vendedor.",
             "url": "https://ee.kobotoolbox.org/x/ejemplo2",
-            "svgPath": "<path d='M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z'></path><circle cx='12' cy='12' r='3'></circle>"
+            "categoria": "Comercial",
+            "icono": "⌛"
+        },
+        {
+            "nombre": "Acompañamiento Comercial (Face to Face)",
+            "descripcion": "Seguimiento y compromisos de los vendedores.",
+            "url": "https://ee.kobotoolbox.org/x/ejemplo3",
+            "categoria": "Comercial",
+            "icono": "🚚"
+        },
+        {
+            "nombre": "Encuesta de Satisfacción – Sistemas de Ventas",
+            "descripcion": "Encuesta del desempeño de los analistas, no de aplicaciones.",
+            "url": "https://ee.kobotoolbox.org/x/ejemplo4",
+            "categoria": "Tecnología",
+            "icono": "📍"
+        },
+        {
+            "nombre": "Censo de Clientes Nuevo Ingreso",
+            "descripcion": "Captura de datos para nuevos puntos de venta.",
+            "url": "https://ee.kobotoolbox.org/x/ejemplo5",
+            "categoria": "Censos",
+            "icono": "🗺️"
         }
     ]
 }

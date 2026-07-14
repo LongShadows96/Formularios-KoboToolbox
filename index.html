@@ -3,59 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portal oficial de formularios para personal de Bocadeli.">
-    <meta name="theme-color" content="#0E1F7A">
     <title>Portal de Formularios | Bocadeli</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
-    <link rel="shortcut icon" href="logo.png" type="image/png">
-    <link rel="apple-touch-icon" href="logo.png">
+    <meta name="theme-color" content="#0E1F7A">
 </head>
 <body>
 
-    <header class="header">
-        <div class="header-container">
-            <div class="logo">
-                <img src="logo.png" alt="Bocadeli Logo" class="logo-img">
-                <div class="logo-text">
-                    <span class="brand">BOCADELI</span>
-                    <span class="subtitle">PORTAL DE FORMULARIOS</span>
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo-area">
+                <img src="logo.png" alt="Bocadeli" class="main-logo">
+                <div class="brand-text">
+                    <span class="bi-text">INTELIGENCIA COMERCIAL · BI</span>
+                    <h1>PORTAL DE FORMULARIOS</h1>
                 </div>
             </div>
-            <nav>
-                <button id="installBtn" class="btn-install hidden">Instalar Aplicación</button>
-            </nav>
+            <div class="slogan-area">
+                <img src="https://img.icons8.com/color/96/null/smiling-sun.png" style="width:40px; display:none;"> 
+                <span class="slogan">¡DALE <br><strong>SABOR</strong><br> A TU VIDA!</span>
+            </div>
         </div>
     </header>
 
-    <main class="container">
-        <section class="hero">
-            <h1>Bienvenido al Portal</h1>
-            <p>Seleccione el formulario correspondiente para su gestión en campo.</p>
-        </section>
+    <section class="search-section">
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" placeholder="Buscar formulario por nombre, área o palabra clave...">
+        </div>
+    </section>
 
-        <div id="forms-container" class="grid-layout">
-            <!-- Cargando dinámicamente -->
-            <div class="loader-container">
-                <div class="spinner"></div>
-                <p>Cargando formularios...</p>
-            </div>
+    <nav class="filter-nav">
+        <div id="filter-container" class="filter-container">
+            <!-- Los botones de filtro se generan dinámicamente -->
+        </div>
+    </nav>
+
+    <main class="container">
+        <div id="results-area">
+            <!-- Los formularios agrupados aparecerán aquí -->
         </div>
     </main>
 
-    <!-- UI Mensajes Especiales -->
     <div id="ios-prompt" class="ios-prompt hidden">
-        <p><strong>Instalar en iPhone:</strong> Toca el icono de compartir <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13"/></svg> y selecciona <strong>"Añadir a pantalla de inicio"</strong>.</p>
-        <button onclick="this.parentElement.classList.add('hidden')">Entendido</button>
+        <p>Instala esta App: Toca <span class="share-icon">⎋</span> y "Añadir a pantalla de inicio".</p>
     </div>
 
-    <div id="protocol-warning" class="protocol-warning hidden">
-        ⚠️ La instalación requiere HTTPS. Use GitHub Pages para habilitar esta función.
-    </div>
-
-    <footer class="footer">
-        <p>&copy; 2024 Bocadeli - Calidad y Sabor</p>
-    </footer>
+    <button id="installBtn" class="btn-install hidden">Instalar Aplicación</button>
 
     <script src="pwa.js"></script>
     <script src="app.js"></script>

@@ -1,16 +1,10 @@
 let deferredPrompt;
 const installBtn = document.getElementById('installBtn');
 
-// Registro Service Worker
 if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js')
-            .then(reg => console.log('SW listo'))
-            .catch(err => console.log('Error SW', err));
-    });
+    navigator.serviceWorker.register('./sw.js');
 }
 
-// Lógica de instalación navegadores Chromium
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
@@ -26,15 +20,7 @@ installBtn.addEventListener('click', async () => {
     }
 });
 
-// Detectar iOS
-const isIos = /iPhone|iPad|iPod/.test(navigator.userAgent) && !window.MSStream;
-const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
-
-if (isIos && !isStandalone) {
+// Detección iOS
+if (/iPhone|iPad|iPod/.test(navigator.userAgent) && !window.MSStream && !window.navigator.standalone) {
     document.getElementById('ios-prompt').classList.remove('hidden');
-}
-
-// Alerta protocolo local
-if (window.location.protocol === 'file:') {
-    document.getElementById('protocol-warning').classList.remove('hidden');
 }
