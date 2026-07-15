@@ -1,5 +1,5 @@
 // IMPORTANTE: Cambia este número (ejemplo: v1.1 a v1.2) cada vez que edites tus formularios
-const CACHE_NAME = 'bocadeli-cache-v1.2';
+const CACHE_NAME = 'bocadeli-cache-v1.3';
 
 const RECURSOS = [
     './',
