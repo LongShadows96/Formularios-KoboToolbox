@@ -1,57 +1,98 @@
-// IMPORTANTE: Cambia este número (ejemplo: v1.1 a v1.2) cada vez que edites tus formularios
-const CACHE_NAME = 'bocadeli-cache-v1.5';
+'use strict';
 
-const RECURSOS = [
+const CACHE_NAME = 'bocadeli-cache-v2.1';
+const APP_SHELL = [
     './',
     './index.html',
     './style.css',
     './app.js',
     './pwa.js',
+    './manifest.json',
     './formularios.json',
-    './logo.png'
+    './offline.html',
+    './logo.png',
+    './icon.svg'
 ];
 
-// Instalación: Forzamos la entrada del nuevo worker
-self.addEventListener('install', e => {
+const FORMS_URL = new URL('./formularios.json', self.location.href).href;
+
+self.addEventListener('install', event => {
     self.skipWaiting();
-    e.waitUntil(
-        caches.open(CACHE_NAME).then(cache => cache.addAll(RECURSOS))
+    event.waitUntil(
+        caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL))
     );
 });
 
-// Activación: Aquí es donde se borran los datos viejos automáticamente
-self.addEventListener('activate', e => {
-    e.waitUntil(
-        caches.keys().then(keys => {
-            return Promise.all(
-                keys.map(key => {
-                    if (key !== CACHE_NAME) {
-                        console.log('Limpiando caché antigua...');
-                        return caches.delete(key);
-                    }
-                })
-            );
-        })
-    );
-    self.clients.claim();
+self.addEventListener('activate', event => {
+    event.waitUntil((async () => {
+        const keys = await caches.keys();
+        await Promise.all(
+            keys
+                .filter(key => key !== CACHE_NAME)
+                .map(key => caches.delete(key))
+        );
+        await self.clients.claim();
+    })());
 });
 
-// Estrategia: Buscar en internet primero para el JSON de formularios
-self.addEventListener('fetch', e => {
-    if (e.request.url.includes('formularios.json')) {
-        e.respondWith(
-            fetch(e.request)
-                .then(res => {
-                    const copia = res.clone();
-                    caches.open(CACHE_NAME).then(cache => cache.put(e.request, copia));
-                    return res;
-                })
-                .catch(() => caches.match(e.request))
-        );
-    } else {
-        // Para diseño y logo, usar caché para que sea instantáneo
-        e.respondWith(
-            caches.match(e.request).then(res => res || fetch(e.request))
-        );
+async function networkFirst(request, fallbackRequest = request) {
+    const cache = await caches.open(CACHE_NAME);
+
+    try {
+        const response = await fetch(request, { cache: 'no-store' });
+        if (response && response.ok) {
+            await cache.put(fallbackRequest, response.clone());
+        }
+        return response;
+    } catch (error) {
+        const cached = await cache.match(fallbackRequest);
+        if (cached) return cached;
+        throw error;
     }
+}
+
+async function staleWhileRevalidate(request) {
+    const cache = await caches.open(CACHE_NAME);
+    const cached = await cache.match(request);
+
+    const networkPromise = fetch(request)
+        .then(response => {
+            if (response && response.ok) {
+                cache.put(request, response.clone());
+            }
+            return response;
+        })
+        .catch(() => null);
+
+    return cached || networkPromise;
+}
+
+self.addEventListener('fetch', event => {
+    const request = event.request;
+
+    if (request.method !== 'GET') return;
+
+    const url = new URL(request.url);
+
+    // No intentamos cachear recursos externos (por ejemplo, KoboToolbox).
+    if (url.origin !== self.location.origin) return;
+
+    if (url.pathname.endsWith('/formularios.json')) {
+        const canonicalRequest = new Request(FORMS_URL, { credentials: 'same-origin' });
+        event.respondWith(networkFirst(request, canonicalRequest));
+        return;
+    }
+
+    if (request.mode === 'navigate') {
+        event.respondWith((async () => {
+            try {
+                return await networkFirst(request);
+            } catch {
+                return (await caches.match('./index.html')) || (await caches.match('./offline.html'));
+            }
+        })());
+        return;
+    }
+
+    event.respondWith(staleWhileRevalidate(request));
 });

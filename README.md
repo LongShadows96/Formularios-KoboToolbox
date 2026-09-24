@@ -1,50 +1,100 @@
-📝 PORTAL DE FORMULARIOS BOCADELI (PWA)
-Bienvenido al repositorio oficial del Portal de Formularios Bocadeli. Esta es una Aplicación Web Progresiva (PWA) de alto rendimiento diseñada para centralizar todos los formularios de KoboToolbox en una interfaz profesional, rápida y moderna.
-🚀 INSTALACIÓN Y DESPLIEGUE (GitHub Pages)
-Para poner la aplicación en línea hoy mismo, sigue estos pasos:
-Sube los archivos: Sube todos los archivos del proyecto (index.html, style.css, app.js, pwa.js, sw.js, manifest.json, formularios.json y tu logo.png) a un repositorio de GitHub.
-Activa la web:
-En tu repositorio, ve a la pestaña Settings (Configuración).
-En el menú de la izquierda, entra en Pages.
-En Build and deployment, selecciona la rama main (o master) y dale a Save.
-Espera un momento: GitHub te dará un enlace (ej: https://tu-usuario.github.io/tu-repositorio/). Esa es la dirección oficial de tu portal.
-✍️ CÓMO AGREGAR MÁS FORMULARIOS
-No necesitas tocar el código de la aplicación. Todo se controla desde el archivo formularios.json.
-Pasos para agregar uno nuevo:
-Abre el archivo formularios.json.
-Añade un nuevo bloque de código como este (asegúrate de poner una coma , después del bloque anterior):
-code
-JSON
+# Portal de Formularios Bocadeli (PWA)
+
+Portal PWA para centralizar formularios de KoboToolbox en una sola interfaz.
+
+## Navegadores compatibles
+
+El portal no está configurado exclusivamente para Chrome. Está diseñado para funcionar en navegadores modernos con HTTPS, entre ellos:
+
+- Firefox
+- Chrome
+- Microsoft Edge
+- Samsung Internet
+- Safari en iPhone/iPad
+- Otros navegadores modernos compatibles con JavaScript, Service Worker y HTTPS
+
+La instalación como PWA puede variar según el navegador. Si el navegador no ofrece un cuadro automático de instalación, el portal muestra un botón **Cómo instalar** con una guía general.
+
+## Permisos de ubicación de Kobo
+
+El portal no puede forzar por JavaScript que un navegador mantenga de forma permanente el permiso de ubicación de KoboToolbox. La ubicación es solicitada por `https://ee.kobotoolbox.org` y cada navegador administra su propio permiso.
+
+Esto significa que:
+
+1. Si un usuario trabaja únicamente con Firefox, debe autorizar la ubicación de Kobo en Firefox.
+2. Si posteriormente abre Kobo en Chrome, Safari u otro navegador, debe autorizarlo también allí.
+3. Los permisos de ubicación no se comparten entre navegadores.
+4. Algunos navegadores pueden otorgar permisos temporales. Cuando exista una opción como **Recordar esta decisión**, **Permitir** de forma persistente o equivalente, conviene utilizarla.
+5. En Firefox, si aparece **Recordar esta decisión**, debe marcarse; de lo contrario, el permiso puede quedar temporal.
+
+### Android
+
+- Mantener activa la ubicación del teléfono.
+- Dar permiso de ubicación al navegador que se utilice: Firefox, Chrome, Edge, Samsung Internet u otro.
+- Usar **Ubicación precisa** si el equipo la ofrece y el proceso de campo la requiere.
+- Dentro de Kobo, permitir el acceso a la ubicación y guardar/recordar la decisión cuando el navegador lo permita.
+
+### iPhone / iPad
+
+- Mantener activos los Servicios de localización de iOS.
+- Conceder acceso de ubicación al navegador utilizado.
+- Autorizar también el sitio de Kobo cuando el navegador lo solicite.
+- En Safari, los permisos del sitio se pueden revisar desde la configuración de Safari o la configuración del sitio web.
+
+> Importante: por diseño de seguridad de los navegadores, una aplicación web no puede activar silenciosamente un permiso de ubicación que el usuario o el sistema operativo haya bloqueado, revocado o configurado como temporal.
+
+## Comportamiento de los formularios
+
+Los formularios Kobo se abren desde una acción directa del usuario y el portal intenta reutilizar la misma ventana/pestaña de Kobo durante la sesión cuando el navegador lo permite. Si el navegador no permite esa reutilización o bloquea la apertura, el portal navega directamente al formulario como alternativa.
+
+Este comportamiento no depende de Chrome y funciona con las capacidades estándar del navegador.
+
+## Correcciones técnicas incluidas
+
+- Eliminado el `cache busting` con timestamp que generaba copias distintas de `formularios.json`.
+- `formularios.json` usa estrategia **network-first** con una única copia de respaldo.
+- El Service Worker precarga `manifest.json`, `offline.html` e `icon.svg`.
+- Se agregó fallback de navegación sin conexión.
+- No se cachean recursos externos de KoboToolbox.
+- Buscador por nombre, descripción y categoría, ignorando tildes.
+- Validación de enlaces HTTPS y del dominio de KoboToolbox.
+- Las tarjetas se crean con nodos DOM para evitar insertar directamente HTML desde el JSON.
+- Indicador de conexión en línea/sin conexión.
+- Manejo de errores del Service Worker.
+- Instalación PWA con alternativa visual para Firefox, Safari/iPhone y navegadores que no soportan `beforeinstallprompt`.
+- Guía de permisos de ubicación independiente del navegador.
+
+## Despliegue en GitHub Pages
+
+Suba estos archivos al repositorio:
+
+- `index.html`
+- `style.css`
+- `app.js`
+- `pwa.js`
+- `sw.js`
+- `manifest.json`
+- `formularios.json`
+- `offline.html`
+- `logo.png`
+- `icon.svg`
+
+Luego vaya a **Settings > Pages** y publique la rama correspondiente.
+
+## Actualizar formularios
+
+Los formularios se administran desde `formularios.json`.
+
+```json
 {
-    "nombre": "Nombre del Formulario",
-    "descripcion": "Descripción detallada de para qué sirve este registro.",
-    "url": "https://enlace-de-kobo.com/tu-formulario",
-    "categoria": "Ventas",
-    "icono": "📋"
+  "nombre": "Nombre del Formulario",
+  "descripcion": "Descripción del formulario.",
+  "url": "https://ee.kobotoolbox.org/x/XXXXXXXX",
+  "categoria": "Comercial",
+  "icono": "📋"
 }
-Categoría: Si pones una categoría nueva que no existe, la App creará automáticamente una nueva sección y un botón de filtro nuevo.
-Iconos: Puedes usar cualquier Emoji (📋, ⌛, 🚚, 📍, 🗺️, 🔍, 📊).
-🔄 LA REGLA DE ORO PARA ACTUALIZAR (Versiones)
-Las PWA guardan una copia de la App en el celular del usuario para que cargue instantáneamente. Si solo cambias el JSON, el celular del usuario no se enterará del cambio.
-Para forzar la actualización en todos los teléfonos sin que el usuario tenga que borrar datos:
-Haz tus cambios en formularios.json.
-Abre el archivo sw.js.
-Busca la primera línea: const CACHE_NAME = 'bocadeli-cache-v1.2';
-Sube el número: Cámbialo a v1.3, v1.4, etc.
-Sube los cambios a GitHub.
-¿Qué pasará? Cuando el usuario abra la App, el sistema detectará el cambio de versión en el sw.js, borrará el caché viejo automáticamente y mostrará los nuevos formularios al instante.
-📱 CÓMO INSTALAR EN EL CELULAR
-Android (Chrome, Edge, Samsung Internet)
-Aparecerá un botón en la parte inferior que dice "Instalar Aplicación". Al tocarlo, el portal se guardará con su icono de Bocadeli en la pantalla de inicio y funcionará como una App nativa.
-iOS (iPhone / iPad)
-Abre el portal en Safari.
-Toca el botón Compartir (cuadrado con flecha hacia arriba).
-Busca y selecciona "Añadir a pantalla de inicio".
-📂 ESTRUCTURA DE ARCHIVOS
-index.html: Estructura base, buscador y filtros.
-style.css: Diseño corporativo, tarjetas Fluent y modo responsive.
-app.js: Lógica de búsqueda en tiempo real y carga dinámica de formularios.
-pwa.js: Sensor de instalaciones y detector de actualizaciones automáticas.
-sw.js: El Service Worker (gestiona el modo offline y la limpieza de caché).
-formularios.json: Tu "Base de Datos" (donde guardas los links de Kobo).
-manifest.json: Configura cómo se ve la App al instalarse (nombre, colores, iconos).
+```
+
+No es necesario cambiar la versión del Service Worker cuando solo se modifica `formularios.json`, porque el portal consulta primero la versión del servidor y actualiza su copia local.
+
+Cuando modifique código o archivos estáticos (`app.js`, `pwa.js`, `style.css`, `index.html`, etc.), cambie `CACHE_NAME` en `sw.js` para forzar la actualización del App Shell.

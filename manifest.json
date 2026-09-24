@@ -1,11 +1,20 @@
 {
+    "id": "./",
     "name": "Portal de Formularios Bocadeli",
     "short_name": "Portal Bocadeli",
+    "description": "Acceso centralizado a formularios de campo de Bocadeli.",
+    "lang": "es",
     "start_url": "./index.html",
+    "scope": "./",
     "display": "standalone",
-    "background_color": "#0E1F7A",
+    "background_color": "#F3F5F9",
     "theme_color": "#0E1F7A",
     "icons": [
-        { "src": "logo.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+        {
+            "src": "logo.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
     ]
 }

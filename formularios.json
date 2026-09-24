@@ -29,22 +29,22 @@
             "icono": "📍"
         },
         {
-            "nombre": "Capitalizacion Censo",
-            "descripcion": "Captura de datos de la capitalizacion del censo Bocadeli.",
+            "nombre": "Capitalización Censo",
+            "descripcion": "Captura de datos de la capitalización del censo Bocadeli.",
             "url": "https://ee.kobotoolbox.org/x/BXG2L4Yx",
             "categoria": "Censos",
             "icono": "🗺️"
         },
         {
-            "nombre": "Recoleccion Cambios de Productos",
-            "descripcion": "Formulario para el registro de las unidades de cambios de productos Bocadeli",
+            "nombre": "Recolección Cambios de Productos",
+            "descripcion": "Formulario para el registro de las unidades de cambios de productos Bocadeli.",
             "url": "https://ee.kobotoolbox.org/x/HSP4zVyx",
             "categoria": "Comercial",
             "icono": "🔄️"
         },
         {
             "nombre": "Registros de Reuniones Matinales, Semanal y Mensual (Jefes, Supervisores)",
-            "descripcion": "Formulario para el registro de las reuniones diarias, Semanales, Mensuales tanto Jefes como Supervisores",
+            "descripcion": "Formulario para el registro de reuniones matinales, semanales y mensuales de jefes y supervisores.",
             "url": "https://ee.kobotoolbox.org/x/1nonjJf3",
             "categoria": "Comercial",
             "icono": "🤝"

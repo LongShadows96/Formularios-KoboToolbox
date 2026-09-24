@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Portal de formularios de campo Bocadeli">
     <title>Portal de Formularios | Bocadeli</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
@@ -15,6 +16,7 @@
         <div class="navbar-content">
             <img src="logo.png" alt="Bocadeli" class="nav-logo">
             <span class="nav-title">BOCADELI</span>
+            <span id="connectionStatus" class="connection-status" aria-live="polite">En línea</span>
         </div>
     </header>
 
@@ -24,29 +26,70 @@
             <p>Seleccione el formulario correspondiente para su gestión en campo.</p>
         </section>
 
-        <!-- BUSCADOR CORREGIDO -->
+        <section class="location-notice" aria-label="Información de ubicación">
+            <div class="location-notice-icon" aria-hidden="true">📍</div>
+            <div class="location-notice-content">
+                <strong>Ubicación en formularios Kobo</strong>
+                <p>Compatible con Firefox, Chrome, Edge, Samsung Internet y navegadores de iPhone/iPad. El permiso de ubicación lo administra cada navegador para <b>ee.kobotoolbox.org</b>; si usa más de uno, debe autorizar Kobo en cada navegador.</p>
+            </div>
+            <button id="locationHelpBtn" type="button" class="btn-location-help">Cómo configurarlo</button>
+        </section>
+
         <section class="search-area">
             <div class="search-box">
-                <span class="search-icon">🔍</span>
-                <input type="text" id="searchInput" placeholder="Buscar por nombre o categoría...">
+                <span class="search-icon" aria-hidden="true">🔍</span>
+                <input type="search" id="searchInput" placeholder="Buscar por nombre, descripción o categoría..." autocomplete="off" aria-label="Buscar formularios">
             </div>
         </section>
 
-        <!-- FILTROS RESPONSIVE -->
-        <nav class="filter-wrapper">
-            <div id="filter-container" class="filter-container">
-                <!-- Botones se cargan aquí -->
-            </div>
+        <nav class="filter-wrapper" aria-label="Categorías de formularios">
+            <div id="filter-container" class="filter-container"></div>
         </nav>
 
-        <div id="results-area" class="results-area">
-            <!-- Cards se cargan aquí -->
-        </div>
+        <div id="results-area" class="results-area" aria-live="polite"></div>
     </main>
 
-    <button id="installBtn" class="btn-install hidden">Instalar Aplicación</button>
+    <button id="installBtn" class="btn-install hidden" type="button">Instalar Aplicación</button>
 
-    <script src="pwa.js"></script>
-    <script src="app.js"></script>
+    <div id="locationModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="locationModalTitle">
+        <div class="modal-card">
+            <button id="closeLocationModal" class="modal-close" type="button" aria-label="Cerrar">×</button>
+            <h2 id="locationModalTitle">Configurar ubicación para Kobo</h2>
+            <p class="modal-intro">El portal no está amarrado a un navegador específico. La ubicación la solicita el formulario de <strong>ee.kobotoolbox.org</strong> y cada navegador conserva sus propios permisos.</p>
+
+            <h3 class="modal-subtitle">Android — Firefox, Chrome, Edge, Samsung Internet u otro navegador</h3>
+            <ol class="location-steps">
+                <li>Mantenga activa la ubicación del teléfono.</li>
+                <li>En los permisos de Android para el navegador que esté usando, habilite <strong>Ubicación</strong> mientras se usa la aplicación y, si aparece, <strong>Ubicación precisa</strong>.</li>
+                <li>Abra un formulario Kobo y autorice el acceso a la ubicación. Si el navegador ofrece una opción para <strong>recordar</strong> o <strong>mantener</strong> la decisión, actívela.</li>
+                <li>En Firefox, si aparece <strong>“Recordar esta decisión”</strong>, márquela para evitar que el permiso quede únicamente temporal.</li>
+            </ol>
+
+            <h3 class="modal-subtitle">iPhone / iPad</h3>
+            <ol class="location-steps">
+                <li>Active <strong>Servicios de localización</strong> en iOS.</li>
+                <li>Conceda ubicación al navegador que utilice (Safari, Firefox, Chrome u otro) mientras la app esté en uso.</li>
+                <li>Al abrir Kobo, permita también la ubicación para el sitio. En Safari puede revisar el permiso del sitio desde la configuración de Safari o la configuración del sitio web.</li>
+            </ol>
+
+            <div class="modal-note">
+                <strong>Importante:</strong> una página web no puede forzar un permiso de ubicación “para siempre”. La duración depende del navegador y del sistema operativo. Además, los permisos no se comparten entre Firefox, Chrome, Safari u otros navegadores; si una persona cambia de navegador, debe autorizar Kobo en ese navegador también.
+            </div>
+        </div>
+    </div>
+
+    <div id="installHelpModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="installHelpTitle">
+        <div class="modal-card">
+            <button id="closeInstallHelp" class="modal-close" type="button" aria-label="Cerrar">×</button>
+            <h2 id="installHelpTitle">Instalar el Portal Bocadeli</h2>
+            <p id="installHelpText" class="modal-intro">Abra el menú de su navegador y busque una opción como “Instalar”, “Añadir a pantalla de inicio” o “Agregar a pantalla de inicio”. El nombre puede variar según el navegador y el teléfono.</p>
+            <div class="modal-note">
+                <strong>Nota:</strong> el portal puede usarse sin instalarlo. La instalación solo facilita el acceso desde el icono de la pantalla de inicio.
+            </div>
+        </div>
+    </div>
+
+    <script src="pwa.js" defer></script>
+    <script src="app.js" defer></script>
 </body>
 </html>
