@@ -98,3 +98,12 @@ Los formularios se administran desde `formularios.json`.
 No es necesario cambiar la versión del Service Worker cuando solo se modifica `formularios.json`, porque el portal consulta primero la versión del servidor y actualiza su copia local.
 
 Cuando modifique código o archivos estáticos (`app.js`, `pwa.js`, `style.css`, `index.html`, etc.), cambie `CACHE_NAME` en `sw.js` para forzar la actualización del App Shell.
+
+
+## Versión 2.2 — corrección de apertura de formularios
+
+Se eliminó la reutilización de una única ventana/pestaña de Kobo. Esa lógica podía dejar una referencia de ventana inválida después de que el usuario cerrara el formulario, especialmente en navegadores móviles.
+
+Ahora cada botón **Abrir Formulario** es un enlace HTTPS normal que abre el formulario seleccionado en una pestaña independiente con `target="_blank"` y `rel="noopener noreferrer"`. Esto funciona de forma más consistente en Firefox, Chrome, Edge, Samsung Internet y Safari/iOS. Cerrar un formulario ya no afecta los botones de los demás formularios.
+
+El permiso de ubicación sigue perteneciendo al sitio `ee.kobotoolbox.org` dentro del navegador utilizado; abrir una pestaña nueva no borra un permiso persistente concedido al sitio.

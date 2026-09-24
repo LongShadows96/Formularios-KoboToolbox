@@ -2,9 +2,6 @@
 
 let formulariosData = [];
 let categoriaActiva = 'Todos';
-let koboWindow = null;
-
-const KOBO_WINDOW_NAME = 'bocadeli_kobo_formularios';
 const KOBO_HOSTS_PERMITIDOS = new Set([
     'ee.kobotoolbox.org'
 ]);
@@ -42,42 +39,6 @@ function validarUrlKobo(url) {
             : null;
     } catch {
         return null;
-    }
-}
-
-function abrirFormularioKobo(url) {
-    const urlSegura = validarUrlKobo(url);
-
-    if (!urlSegura) {
-        alert('El enlace del formulario no es válido o no pertenece al dominio autorizado de KoboToolbox.');
-        return;
-    }
-
-    // Reutilizamos una sola ventana/pestaña de Kobo. Esto ayuda a conservar la misma
-    // sesión del sitio y evita abrir múltiples pestañas durante la jornada.
-    try {
-        if (!koboWindow || koboWindow.closed) {
-            koboWindow = window.open(urlSegura, KOBO_WINDOW_NAME);
-        } else {
-            koboWindow.location.href = urlSegura;
-            koboWindow.focus();
-        }
-
-        if (!koboWindow) {
-            // Fallback si el navegador bloquea la apertura de una nueva ventana.
-            window.location.assign(urlSegura);
-            return;
-        }
-
-        // Evita que Kobo pueda navegar la ventana del portal mediante window.opener.
-        try {
-            koboWindow.opener = null;
-        } catch (error) {
-            console.debug('No fue posible limpiar window.opener:', error);
-        }
-    } catch (error) {
-        console.error('Error abriendo formulario:', error);
-        window.location.assign(urlSegura);
     }
 }
 
@@ -170,13 +131,19 @@ function crearCard(formulario) {
     const description = document.createElement('p');
     description.textContent = formulario.descripcion;
 
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'btn-form';
-    button.textContent = 'Abrir Formulario';
-    button.addEventListener('click', () => abrirFormularioKobo(formulario.url));
+    // Usamos un enlace real en lugar de reutilizar una referencia de ventana.
+    // Es más estable entre Firefox, Chrome, Edge, Samsung Internet y Safari/iOS.
+    // Cada toque abre el formulario solicitado en una pestaña nueva independiente,
+    // por lo que cerrar un formulario no bloquea los botones siguientes.
+    const link = document.createElement('a');
+    link.className = 'btn-form';
+    link.textContent = 'Abrir Formulario';
+    link.href = validarUrlKobo(formulario.url);
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.setAttribute('aria-label', `Abrir formulario: ${formulario.nombre}`);
 
-    card.append(icon, title, description, button);
+    card.append(icon, title, description, link);
     return card;
 }
 
